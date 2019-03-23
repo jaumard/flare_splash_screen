@@ -62,9 +62,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Future _processCallback() async {
     if(widget.until != null) {
       await widget.until();
-      setState(() {
-        _currentAnimation = widget.endAnimation;
-      });
+      if(widget.endAnimation == null) {
+       _goToNext();
+      }
+      else {
+        setState(() {
+          _currentAnimation = widget.endAnimation;
+        });
+      }
     }
   }
 

@@ -12,11 +12,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen.navigate(
-        name: 'intro.flr',
-        next: MyHomePage(title: 'Flutter Demo Home Page'),
-        until: () => Future.delayed(Duration(seconds: 5)),
-        startAnimation: '1',
+      home: Builder(//add builder here to have a context where navigator is available
+        builder: (context) => SplashScreen.callback(
+          name: 'intro.flr',
+          onFinished: () {
+            Navigator.of(context).pushReplacement(PageRouteBuilder(pageBuilder: (_,__,___) => MyHomePage(title: 'Flutter Demo Home Page')));
+          },
+          loopAnimation: '1',
+          until: () => Future.delayed(Duration(seconds: 1)),
+          endAnimation: '1',
+        ),
       ),
     );
   }

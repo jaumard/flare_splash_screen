@@ -12,12 +12,36 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen.navigate(
-        name: 'intro.flr',
-        next: MyHomePage(title: 'Flutter Demo Home Page'),
-        until: () => Future.delayed(Duration(seconds: 5)),
-        startAnimation: '1',
-      ),
+      home: MySplashScreen(),
+    );
+  }
+}
+
+class MySplashScreen extends StatefulWidget {
+  @override
+  _MySplashScreenState createState() => _MySplashScreenState();
+}
+
+class _MySplashScreenState extends State<MySplashScreen> {
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 5)).then((_) => setState(() {
+          _isLoading = false;
+        }));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SplashScreen.navigate(
+      name: 'intro.flr',
+      next: MyHomePage(title: 'Flutter Demo Home Page'),
+      startAnimation: '1',
+      loopAnimation: '1',
+      isLoading: _isLoading,
+      endAnimation: '1',
     );
   }
 }

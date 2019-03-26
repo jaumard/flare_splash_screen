@@ -1,88 +1,132 @@
 library flare_splash_screen;
 
-import 'package:flare_flutter/flare_actor.dart';
+import 'package:flare_loading/flare_loading.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   final String name;
   final Widget next;
+  final VoidCallback onFinished;
   final double width;
   final double height;
   final Alignment alignment;
   final Future<void> Function() until;
-  final String animation;
+  final String loopAnimation;
   final String endAnimation;
+  final String startAnimation;
   final RoutePageBuilder transitionsBuilder;
+  final bool isLoading;
+
+  factory SplashScreen.callback({
+    @required String name,
+    @required VoidCallback onFinished,
+    Key key,
+    Future Function() until,
+    bool isLoading,
+    String loopAnimation,
+    Alignment alignment = Alignment.center,
+    double width,
+    double height,
+    String endAnimation,
+    RoutePageBuilder transitionsBuilder,
+    String startAnimation,
+  }) {
+    return SplashScreen(
+      name,
+      null,
+      until: until,
+      loopAnimation: loopAnimation,
+      startAnimation: startAnimation,
+      isLoading: isLoading,
+      endAnimation: endAnimation,
+      width: width,
+      height: height,
+      transitionsBuilder: transitionsBuilder,
+      onFinished: onFinished,
+      alignment: alignment,
+    );
+  }
+
+  factory SplashScreen.navigate({
+    @required String name,
+    @required Widget next,
+    Key key,
+    bool isLoading,
+    Future Function() until,
+    String loopAnimation,
+    Alignment alignment = Alignment.center,
+    double width,
+    double height,
+    String endAnimation,
+    RoutePageBuilder transitionsBuilder,
+    String startAnimation,
+  }) {
+    return SplashScreen(
+      name,
+      next,
+      until: until,
+      isLoading: isLoading,
+      loopAnimation: loopAnimation,
+      startAnimation: startAnimation,
+      endAnimation: endAnimation,
+      width: width,
+      height: height,
+      transitionsBuilder: transitionsBuilder,
+      onFinished: null,
+      alignment: alignment,
+    );
+  }
 
   const SplashScreen(
     this.name,
     this.next, {
-    this.animation,
+    this.loopAnimation,
     Key key,
+    this.isLoading,
     this.until,
     this.alignment = Alignment.center,
-    this.width = double.infinity,
-    this.height = double.infinity,
+    this.width,
+    this.height,
     this.transitionsBuilder,
     this.endAnimation,
+    this.startAnimation,
+    this.onFinished,
   }) : super(key: key);
-
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  String _currentAnimation;
-
-  @override
-  void initState() {
-    _currentAnimation = widget.animation ?? widget.name;
-    _processCallback();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Align(
-        alignment: widget.alignment,
-        child: SizedBox(
-          width: widget.width,
-          height: widget.height,
-          child: FlareActor(
-            widget.name,
-            animation: _currentAnimation,
-            callback: (_) => _goToNext(),
-          ),
+      child: FlareLoading(
+        endAnimation: endAnimation,
+        startAnimation: startAnimation,
+        loopAnimation: loopAnimation,
+        width: width,
+        height: height,
+        onFinished: () {
+          _goToNext(context);
+        },
+        name: name,
+        alignment: alignment,
+        until: until,
+        isLoading: isLoading,
+      ),
+    );
+  }
+
+  _goToNext(BuildContext context) {
+    if (next == null) {
+      onFinished();
+    } else {
+      Navigator.of(context).pushReplacement(
+        PageRouteBuilder(
+          pageBuilder: (_, __, ___) => next,
+          transitionsBuilder: transitionsBuilder == null
+              ? (_, Animation<double> animation, __, Widget child) {
+                  return FadeTransition(opacity: animation, child: child);
+                }
+              : transitionsBuilder,
         ),
-      ),
-    );
-  }
-
-  Future _processCallback() async {
-    if(widget.until != null) {
-      await widget.until();
-      if(widget.endAnimation == null) {
-       _goToNext();
-      }
-      else {
-        setState(() {
-          _currentAnimation = widget.endAnimation;
-        });
-      }
+      );
     }
-  }
-
-  _goToNext() {
-    Navigator.of(context).pushReplacement(
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => widget.next,
-        transitionsBuilder: widget.transitionsBuilder == null
-            ? (_, Animation<double> animation, __, Widget child) {
-                return FadeTransition(opacity: animation, child: child);
-              }
-            : widget.transitionsBuilder,
-      ),
-    );
   }
 }

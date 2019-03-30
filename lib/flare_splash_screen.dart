@@ -9,6 +9,7 @@ class SplashScreen extends StatelessWidget {
   final VoidCallback onFinished;
   final double width;
   final double height;
+  final Color backgroundColor;
   final Alignment alignment;
   final Future<void> Function() until;
   final String loopAnimation;
@@ -23,6 +24,7 @@ class SplashScreen extends StatelessWidget {
     Key key,
     Future Function() until,
     bool isLoading,
+    Color backgroundColor,
     String loopAnimation,
     Alignment alignment = Alignment.center,
     double width,
@@ -35,6 +37,7 @@ class SplashScreen extends StatelessWidget {
       name,
       null,
       until: until,
+      backgroundColor: backgroundColor,
       loopAnimation: loopAnimation,
       startAnimation: startAnimation,
       isLoading: isLoading,
@@ -52,6 +55,7 @@ class SplashScreen extends StatelessWidget {
     @required Widget next,
     Key key,
     bool isLoading,
+    Color backgroundColor,
     Future Function() until,
     String loopAnimation,
     Alignment alignment = Alignment.center,
@@ -65,6 +69,7 @@ class SplashScreen extends StatelessWidget {
       name,
       next,
       until: until,
+      backgroundColor: backgroundColor,
       isLoading: isLoading,
       loopAnimation: loopAnimation,
       startAnimation: startAnimation,
@@ -83,6 +88,7 @@ class SplashScreen extends StatelessWidget {
     this.loopAnimation,
     Key key,
     this.isLoading,
+    this.backgroundColor,
     this.until,
     this.alignment = Alignment.center,
     this.width,
@@ -96,6 +102,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: backgroundColor,
       child: FlareLoading(
         endAnimation: endAnimation,
         startAnimation: startAnimation,

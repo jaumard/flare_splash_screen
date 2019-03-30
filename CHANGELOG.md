@@ -1,3 +1,7 @@
+## [2.0.1] 
+
+- Add background color capability
+
 ## [2.0.0] 
 
 - Refactoring to use flare_loading that allow more animation capabilities

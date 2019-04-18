@@ -1,3 +1,7 @@
+## [2.0.1+1]
+
+- update deps
+
 ## [2.0.1] 
 
 - Add background color capability

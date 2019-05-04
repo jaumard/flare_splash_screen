@@ -1,3 +1,7 @@
+## [2.0.1+2]
+
+- fix startAnimation only not working
+
 ## [2.0.1+1]
 
 - update deps

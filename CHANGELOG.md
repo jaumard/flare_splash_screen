@@ -1,3 +1,7 @@
+## [2.1.0]
+
+- refactor finish callback with success error
+
 ## [2.0.1+2]
 
 - fix startAnimation only not working

@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatelessWidget {
   final String name;
   final Widget next;
-  final VoidCallback onFinished;
+  final Function(dynamic data) onSuccess;
+  final Function(dynamic error, dynamic stacktrace) onError;
   final double width;
   final double height;
   final Color backgroundColor;
@@ -20,7 +21,8 @@ class SplashScreen extends StatelessWidget {
 
   factory SplashScreen.callback({
     @required String name,
-    @required VoidCallback onFinished,
+    @required Function(dynamic data) onSuccess,
+    @required Function(dynamic error, dynamic stacktrace) onError,
     Key key,
     Future Function() until,
     bool isLoading,
@@ -45,7 +47,8 @@ class SplashScreen extends StatelessWidget {
       width: width,
       height: height,
       transitionsBuilder: transitionsBuilder,
-      onFinished: onFinished,
+      onSuccess: onSuccess,
+      onError: onError,
       alignment: alignment,
     );
   }
@@ -77,7 +80,8 @@ class SplashScreen extends StatelessWidget {
       width: width,
       height: height,
       transitionsBuilder: transitionsBuilder,
-      onFinished: null,
+      onSuccess: (_) {},
+      onError: (_, __) {},
       alignment: alignment,
     );
   }
@@ -96,7 +100,8 @@ class SplashScreen extends StatelessWidget {
     this.transitionsBuilder,
     this.endAnimation,
     this.startAnimation,
-    this.onFinished,
+    this.onSuccess,
+    this.onError,
   }) : super(key: key);
 
   @override
@@ -109,8 +114,11 @@ class SplashScreen extends StatelessWidget {
         loopAnimation: loopAnimation,
         width: width,
         height: height,
-        onFinished: () {
-          _goToNext(context);
+        onSuccess: (data) {
+          _goToNext(context, data);
+        },
+        onError: (err, stack) {
+          onError(err, stack);
         },
         name: name,
         alignment: alignment,
@@ -120,9 +128,9 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
-  _goToNext(BuildContext context) {
+  _goToNext(BuildContext context, data) {
     if (next == null) {
-      onFinished();
+      onSuccess(data);
     } else {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(

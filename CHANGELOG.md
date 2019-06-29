@@ -1,3 +1,7 @@
+## [2.1.1]
+
+- fix callbacks when only loop animation set
+
 ## [2.1.0]
 
 - refactor finish callback with success error

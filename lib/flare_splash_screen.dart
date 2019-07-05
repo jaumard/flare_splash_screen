@@ -16,7 +16,7 @@ class SplashScreen extends StatelessWidget {
   final String loopAnimation;
   final String endAnimation;
   final String startAnimation;
-  final RoutePageBuilder transitionsBuilder;
+  final RouteTransitionsBuilder transitionsBuilder;
   final bool isLoading;
 
   factory SplashScreen.callback({
@@ -32,7 +32,7 @@ class SplashScreen extends StatelessWidget {
     double width,
     double height,
     String endAnimation,
-    RoutePageBuilder transitionsBuilder,
+    RouteTransitionsBuilder transitionsBuilder,
     String startAnimation,
   }) {
     return SplashScreen(
@@ -65,7 +65,7 @@ class SplashScreen extends StatelessWidget {
     double width,
     double height,
     String endAnimation,
-    RoutePageBuilder transitionsBuilder,
+    RouteTransitionsBuilder transitionsBuilder,
     String startAnimation,
   }) {
     return SplashScreen(

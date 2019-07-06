@@ -1,3 +1,7 @@
+## [2.1.2]
+
+- fix transition builder on navigate 
+
 ## [2.1.1]
 
 - fix callbacks when only loop animation set

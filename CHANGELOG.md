@@ -1,3 +1,7 @@
+## [2.1.3]
+
+- upgrade flare deps to be compatible with last flutter stable
+
 ## [2.1.2]
 
 - fix transition builder on navigate 

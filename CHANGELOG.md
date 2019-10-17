@@ -1,3 +1,8 @@
+## [2.1.4]
+
+- upgrade flare_loading to fix callback not called when using the boolean field  
+- upgrade flare
+
 ## [2.1.3]
 
 - upgrade flare deps to be compatible with last flutter stable

@@ -1,3 +1,8 @@
+## [3.0.0]
+
+- breaking change: next is now a widget builder to avoid instantiate the next screen directly  
+- add fit field
+
 ## [2.1.4]
 
 - upgrade flare_loading to fix callback not called when using the boolean field  

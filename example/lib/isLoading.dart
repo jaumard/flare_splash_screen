@@ -37,7 +37,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
   Widget build(BuildContext context) {
     return SplashScreen.navigate(
       name: 'intro.flr',
-      next: MyHomePage(title: 'Flutter Demo Home Page'),
+      next: (context) => MyHomePage(title: 'Flutter Demo Home Page'),
       startAnimation: '1',
       loopAnimation: '1',
       isLoading: _isLoading,

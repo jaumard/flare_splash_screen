@@ -13,7 +13,7 @@ The splash screen will show the animation and push the new route you gave once i
 ```dart
 SplashScreen.navigate(
     name: 'intro.flr',
-    next: MyHomePage(title: 'Flutter Demo Home Page'),
+    next: (_) => MyHomePage(title: 'Flutter Demo Home Page'),
     until: () => Future.delayed(Duration(seconds: 5)),
     startAnimation: '1',
 ),
@@ -39,7 +39,7 @@ SplashScreen.callback(
 
 `name` : path/name of the flare animation
 
-`next` : screen to show once animation is finished
+`next` : screen to show once animation is finished as widget builder
 
 `loopAnimation`: animation name to run, default same as first param
 

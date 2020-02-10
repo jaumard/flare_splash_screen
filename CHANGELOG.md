@@ -1,3 +1,8 @@
+## [3.0.1]
+
+- update deps
+- correct doc on Readme
+
 ## [3.0.0]
 
 - breaking change: next is now a widget builder to avoid instantiate the next screen directly  

@@ -17,6 +17,7 @@ class SplashScreen extends StatelessWidget {
   final String endAnimation;
   final String startAnimation;
   final RouteTransitionsBuilder transitionsBuilder;
+  final RouteSettings routeSettings;
   final bool isLoading;
   final BoxFit fit;
 
@@ -70,6 +71,7 @@ class SplashScreen extends StatelessWidget {
     double height,
     String endAnimation,
     RouteTransitionsBuilder transitionsBuilder,
+    RouteSettings routeSettings,
     String startAnimation,
   }) {
     return SplashScreen(
@@ -85,6 +87,7 @@ class SplashScreen extends StatelessWidget {
       width: width,
       height: height,
       transitionsBuilder: transitionsBuilder,
+      routeSettings: routeSettings,
       onSuccess: (_) {},
       onError: (_, __) {},
       alignment: alignment,
@@ -103,6 +106,7 @@ class SplashScreen extends StatelessWidget {
     this.width,
     this.height,
     this.transitionsBuilder,
+    this.routeSettings,
     this.endAnimation,
     this.startAnimation,
     this.onSuccess,
@@ -146,6 +150,7 @@ class SplashScreen extends StatelessWidget {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, _, __) => next(context),
+          settings: routeSettings,
           transitionsBuilder: transitionsBuilder == null
               ? (_, Animation<double> animation, __, Widget child) {
                   return FadeTransition(opacity: animation, child: child);

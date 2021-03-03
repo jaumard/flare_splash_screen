@@ -4,6 +4,8 @@
 
 Facilitator for having a Splash screen with a Flare animation until some work has been done for the initialization of the app
 
+If you're using Rive instead of Flare please use [rive_splash_screen](https://pub.dartlang.org/packages/rive_splash_screen)
+
 ## Usage
 
 ### Navigation

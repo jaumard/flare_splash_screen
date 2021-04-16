@@ -5,37 +5,37 @@ import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
   final String name;
-  final WidgetBuilder next;
-  final Function(dynamic data) onSuccess;
-  final Function(dynamic error, dynamic stacktrace) onError;
-  final double width;
-  final double height;
-  final Color backgroundColor;
+  final WidgetBuilder? next;
+  final Function(dynamic data)? onSuccess;
+  final Function(dynamic error, dynamic stacktrace)? onError;
+  final double? width;
+  final double? height;
+  final Color? backgroundColor;
   final Alignment alignment;
-  final Future<void> Function() until;
-  final String loopAnimation;
-  final String endAnimation;
-  final String startAnimation;
-  final RouteTransitionsBuilder transitionsBuilder;
-  final bool isLoading;
-  final BoxFit fit;
+  final Future<void> Function()? until;
+  final String? loopAnimation;
+  final String? endAnimation;
+  final String? startAnimation;
+  final RouteTransitionsBuilder? transitionsBuilder;
+  final bool? isLoading;
+  final BoxFit? fit;
 
   factory SplashScreen.callback({
-    @required String name,
-    @required Function(dynamic data) onSuccess,
-    @required Function(dynamic error, dynamic stacktrace) onError,
-    Key key,
-    Future Function() until,
-    bool isLoading,
+    required String name,
+    required Function(dynamic data) onSuccess,
+    required Function(dynamic error, dynamic stacktrace) onError,
+    Key? key,
+    Future Function()? until,
+    bool? isLoading,
     BoxFit fit = BoxFit.contain,
-    Color backgroundColor,
-    String loopAnimation,
+    Color? backgroundColor,
+    String? loopAnimation,
     Alignment alignment = Alignment.center,
-    double width,
-    double height,
-    String endAnimation,
-    RouteTransitionsBuilder transitionsBuilder,
-    String startAnimation,
+    double? width,
+    double? height,
+    String? endAnimation,
+    RouteTransitionsBuilder? transitionsBuilder,
+    String? startAnimation,
   }) {
     return SplashScreen(
       name,
@@ -57,20 +57,20 @@ class SplashScreen extends StatelessWidget {
   }
 
   factory SplashScreen.navigate({
-    @required String name,
-    @required WidgetBuilder next,
-    Key key,
-    bool isLoading,
-    Color backgroundColor,
-    Future Function() until,
-    String loopAnimation,
+    required String name,
+    required WidgetBuilder next,
+    Key? key,
+    bool? isLoading,
+    Color? backgroundColor,
+    Future Function()? until,
+    String? loopAnimation,
     Alignment alignment = Alignment.center,
     BoxFit fit = BoxFit.contain,
-    double width,
-    double height,
-    String endAnimation,
-    RouteTransitionsBuilder transitionsBuilder,
-    String startAnimation,
+    double? width,
+    double? height,
+    String? endAnimation,
+    RouteTransitionsBuilder? transitionsBuilder,
+    String? startAnimation,
   }) {
     return SplashScreen(
       name,
@@ -95,7 +95,7 @@ class SplashScreen extends StatelessWidget {
     this.name,
     this.next, {
     this.loopAnimation,
-    Key key,
+    Key? key,
     this.isLoading,
     this.backgroundColor,
     this.until,
@@ -124,12 +124,12 @@ class SplashScreen extends StatelessWidget {
         loopAnimation: loopAnimation,
         width: width,
         height: height,
-        fit: fit,
+        fit: fit!,
         onSuccess: (data) {
           _goToNext(context, data);
         },
         onError: (err, stack) {
-          onError(err, stack);
+          onError!(err, stack);
         },
         name: name,
         alignment: alignment,
@@ -141,16 +141,16 @@ class SplashScreen extends StatelessWidget {
 
   _goToNext(BuildContext context, data) {
     if (next == null) {
-      onSuccess(data);
+      onSuccess!(data);
     } else {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (context, _, __) => next(context),
+          pageBuilder: (context, _, __) => next!(context),
           transitionsBuilder: transitionsBuilder == null
               ? (_, Animation<double> animation, __, Widget child) {
                   return FadeTransition(opacity: animation, child: child);
                 }
-              : transitionsBuilder,
+              : transitionsBuilder!,
         ),
       );
     }

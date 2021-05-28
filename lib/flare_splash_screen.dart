@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
   final String? endAnimation;
   final String? startAnimation;
   final RouteTransitionsBuilder? transitionsBuilder;
-  final RouteSettings routeSettings;
+  final RouteSettings? routeSettings;
   final bool? isLoading;
   final BoxFit? fit;
 
@@ -71,7 +71,7 @@ class SplashScreen extends StatelessWidget {
     double? height,
     String? endAnimation,
     RouteTransitionsBuilder? transitionsBuilder,
-    RouteSettings routeSettings,
+    RouteSettings? routeSettings,
     String? startAnimation
   }) {
     return SplashScreen(
